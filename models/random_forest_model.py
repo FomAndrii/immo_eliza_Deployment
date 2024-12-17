@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import joblib
 
+
 class ModelEvaluator:
     """
     A class to handle the evaluation of a machine learning model's performance.
@@ -33,6 +34,7 @@ class ModelEvaluator:
         print(f"Root Mean Squared Error (RMSE): {rmse}")
         print(f"Mean Absolute Error (MAE): {mae}")
         print()
+
 
 class RandomForestModel:
     """
@@ -121,6 +123,7 @@ class RandomForestModel:
         print("Cross-Validated R² Scores:", cv_scores)
         print("Mean R² Score from Cross-Validation:", np.mean(cv_scores))
 
+
 class RandomForestPipeline:
     """
     A pipeline to manage the entire Random Forest regression workflow.
@@ -169,6 +172,7 @@ class RandomForestPipeline:
         # Cross-validation
         self.rf_model.cross_validate(X, y)
 
+
 def main():
     """
     Main function to execute the Random Forest regression pipeline.
@@ -178,6 +182,7 @@ def main():
 
     pipeline = RandomForestPipeline(data_path, model_path)
     pipeline.run()
+
 
 if __name__ == "__main__":
     main()

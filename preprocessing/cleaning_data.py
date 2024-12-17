@@ -2,7 +2,7 @@ import os
 import pandas as pd
 
 # Set global option to suppress the FutureWarning about downcasting behavior
-pd.set_option('future.no_silent_downcasting', True)
+pd.set_option("future.no_silent_downcasting", True)
 
 
 class DataPreparation:

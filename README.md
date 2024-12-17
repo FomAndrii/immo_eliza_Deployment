@@ -9,11 +9,12 @@ and supports clean data processing, preprocessing and model prediction.
 
 ### **Folder and File Structure**
 
+```plaintext
 Immo_Deployment/  
     ├── asset/   
     │   ├── predict.png    
     │   ├── screenshot.png     
-    ├── data/                                  #    Contains the processed dataset for training and predictions  
+    ├── data/                               #    Contains the processed dataset for training and predictions  
     │   ├── immoweb_data_cleaned.csv
     │   ├── immoweb_data_processed.csv
     │   ├── zips.csv
@@ -28,6 +29,7 @@ Immo_Deployment/
     ├── app.py                              # The main Streamlit application file for the interactive user interface  
     ├── README.md                           # Documentation for the project  
     ├── requirements.txt                    # Documentation of Python dependencies required to run the project  
+```
 
 ## **Installation**
 
@@ -66,10 +68,10 @@ Input property details, such as locality, type, number of rooms, living area, an
 
 ### **Timeline**
 
-**Day 1:** Data cleaning and preprocessing.
-**Day 2-3:** Feature engineering, correlation analysis, and dummy variable creation.
-**Day 4:** Deployment on Streamlit.io.
-**Day 5-6** Documentation, optimization, and project presentation.
+**Day 1:** Data cleaning and preprocessing.  
+**Day 2-3:** Feature engineering, correlation analysis, and dummy variable creation.  
+**Day 4:** Deployment on Streamlit.io.  
+**Day 5-6** Documentation, optimization, and project presentation.  
 
 ### **Personal Situation**
 
