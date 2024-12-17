@@ -34,7 +34,6 @@ class ModelEvaluator:
         print(f"Mean Absolute Error (MAE): {mae}")
         print()
 
-
 class RandomForestModel:
     """
     A class for training and evaluating a Random Forest model for regression.
@@ -60,6 +59,10 @@ class RandomForestModel:
     def prepare_data(self):
         """
         Prepare features and target variables (X and y).
+
+        Returns:
+        - X: Feature data.
+        - y: Target data.
         """
         X = self.df[
             [
@@ -68,7 +71,6 @@ class RandomForestModel:
                 "Number_of_Rooms",
                 "Living_Area",
                 "Fully_Equipped_Kitchen",
-                
             ]
         ]
         y = self.df["Price"]
@@ -90,6 +92,9 @@ class RandomForestModel:
 
         Parameters:
         - X: Feature data for prediction.
+
+        Returns:
+        - Predicted values.
         """
         return self.rf_regressor.predict(X)
 
@@ -116,45 +121,63 @@ class RandomForestModel:
         print("Cross-Validated R² Scores:", cv_scores)
         print("Mean R² Score from Cross-Validation:", np.mean(cv_scores))
 
-    
-def main():
+class RandomForestPipeline:
     """
-    Main function to load data, train the model, and evaluate its performance.
+    A pipeline to manage the entire Random Forest regression workflow.
     """
-    # Path to the data file
-    data_path = "./data/immoweb_data_processed.csv"
 
-    # Initialize Random Forest model
-    rf_model = RandomForestModel(data_path)
+    def __init__(self, data_path, model_path):
+        """
+        Initialize the pipeline with data and model paths.
 
-    # Prepare data
-    X, y = rf_model.prepare_data()
+        Parameters:
+        - data_path: Path to the dataset.
+        - model_path: Path to save the trained model.
+        """
+        self.data_path = data_path
+        self.model_path = model_path
+        self.rf_model = RandomForestModel(data_path)
 
-    # Split data into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.22, random_state=42
-    )
+    def run(self):
+        """
+        Execute the pipeline: prepare data, train model, evaluate, save model, and cross-validate.
+        """
+        # Prepare data
+        X, y = self.rf_model.prepare_data()
 
-    # Train the model
-    rf_model.train_model(X_train, y_train)
+        # Split data into training and testing sets
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, y, test_size=0.22, random_state=42
+        )
 
-    # Make predictions
-    pred_train = rf_model.predict(X_train)
-    pred_test = rf_model.predict(X_test)
+        # Train the model
+        self.rf_model.train_model(X_train, y_train)
 
-    # Evaluate the model
-    evaluator = ModelEvaluator()
-    evaluator.evaluate_model(y_train, pred_train, "Training")
-    evaluator.evaluate_model(y_test, pred_test, "Testing")
+        # Make predictions
+        pred_train = self.rf_model.predict(X_train)
+        pred_test = self.rf_model.predict(X_test)
 
-    # Save the trained model
-    model_path = "./models/random_forest_model.joblib"
-    rf_model.save_model(model_path)
-    print("Model and preprocessing objects saved successfully!")
+        # Evaluate the model
+        evaluator = ModelEvaluator()
+        evaluator.evaluate_model(y_train, pred_train, "Training")
+        evaluator.evaluate_model(y_test, pred_test, "Testing")
+
+        # Save the trained model
+        self.rf_model.save_model(self.model_path)
+        print("Model saved successfully!")
 
         # Cross-validation
-    rf_model.cross_validate(X, y)
+        self.rf_model.cross_validate(X, y)
 
-    
+def main():
+    """
+    Main function to execute the Random Forest regression pipeline.
+    """
+    data_path = "./data/immoweb_data_processed.csv"
+    model_path = "./models/random_forest_model.joblib"
+
+    pipeline = RandomForestPipeline(data_path, model_path)
+    pipeline.run()
+
 if __name__ == "__main__":
     main()
