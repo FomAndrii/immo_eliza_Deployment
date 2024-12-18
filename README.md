@@ -52,7 +52,7 @@ Run the Streamlit app:
 
             streamlit run app.py
 
-Open the APP [https://immoelizaandriideployment.streamlit.app/][here].
+Open the APP [here](https://immoelizaandriideployment.streamlit.app/).
 
 Input property details, such as locality, type, number of rooms, living area, and kitchen status, to predict the price.
 
