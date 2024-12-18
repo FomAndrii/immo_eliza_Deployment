@@ -52,7 +52,7 @@ Run the Streamlit app:
 
             streamlit run app.py
 
-Open the URL shown in the terminal (default is http://localhost:8501).
+Open the APP [https://immoelizaandriideployment.streamlit.app/][here].
 
 Input property details, such as locality, type, number of rooms, living area, and kitchen status, to predict the price.
 
